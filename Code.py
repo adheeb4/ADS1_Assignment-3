@@ -101,7 +101,7 @@ def scatter():
     plt.figure()
     plt.scatter(dataframe["CO2"], dataframe["Population"], s=20)
     plt.title("Scatter Plot of CO2(mt per capita) vs Total Population ",
-              size=16, pad=10)
+              size=16, pad=30)
     plt.xlabel("CO2")
     plt.ylabel("Population")
     plt.savefig("Scatter", dpi=300, bbox_inches="tight")
