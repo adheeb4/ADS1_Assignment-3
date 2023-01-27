@@ -156,10 +156,13 @@ dataframe["Country Name"] = CO2_data_filtered["Country Name"]
 dataframe["CO2"] = CO2_data_filtered["Mean"]
 dataframe["Population"] = pop_data_filtered["Mean"]
 
-
+# creating copy of dataframe for fitting
 df_fit = dataframe[["CO2", "Population"]].copy()
+# normalizing the values
 df_fit = preprocessing.normalize(df_fit, axis=0)
+# converting normalized value to dataframe
 df_fit = pd.DataFrame(df_fit)
+# printing the attributes of dataframe
 print(df_fit.describe())
 
 for ic in range(2, 17):
@@ -175,7 +178,7 @@ kmeans.fit(df_fit)
 labels = kmeans.labels_
 cen = kmeans.cluster_centers_
 
-
+# Converting transposed data of column to numeric
 pop_data_transposed["China"] = pd.to_numeric(pop_data_transposed["China"])
 pop_data_transposed["Year"] = pop_data_transposed.index
 length = len(pop_data_transposed)
@@ -185,10 +188,12 @@ pop_data_transposed["Year"] = pd.to_numeric(pop_data_transposed["Year"])
 
 year = np.arange(1960, 2020)
 
+# finding param and covar using fit
 param, covar = opt.curve_fit(exp_growth, pop_data_transposed["Year"],
                              pop_data_transposed["China"],
                              p0=(6.6707e+08, 0.03))
 
+# Calling all the functions
 scatter()
 pairplot()
 kmeans_cluster()
